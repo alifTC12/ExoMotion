@@ -2,11 +2,15 @@ package com.example.exoplayer.home
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.exoplayer.databinding.ActivityHomeBinding
 import com.example.exoplayer.domain.Movie
 import com.example.exoplayer.domain.MovieSection
+import com.google.android.material.appbar.AppBarLayout
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -25,6 +29,28 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
         setUpHomeList()
+        setUpToolbar()
+
+        val listener = object : RecyclerView.OnScrollListener() {
+            var overallYScroll = 0
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                overallYScroll += dy
+                if (overallYScroll > viewBinding.appBar.height) {
+                    Toast.makeText(this@HomeActivity, "Hai", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        viewBinding.homeRv.addOnScrollListener(listener)
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(viewBinding.toolbar)
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+            setDisplayShowHomeEnabled(false)
+            setDisplayHomeAsUpEnabled(false)
+        }
     }
 
     private fun setUpHomeList() {
