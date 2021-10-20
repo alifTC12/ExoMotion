@@ -84,6 +84,23 @@ class HomeActivity : AppCompatActivity() {
             movies = listOf(movie, movie, movie, movie, movie)
         )
 
+        val movieSection6 = MovieSection(
+            id = UUID.randomUUID().toString(),
+            title = "Section 2",
+            movies = listOf(movie, movie, movie, movie, movie)
+        )
+
+        val movieSection7 = MovieSection(
+            id = UUID.randomUUID().toString(),
+            title = "Section 2",
+            movies = listOf(movie, movie, movie, movie, movie)
+        )
+
+        val movieSection8 = MovieSection(
+            id = UUID.randomUUID().toString(),
+            title = "Section 2",
+            movies = listOf(movie, movie, movie, movie, movie)
+        )
 
         viewBinding.apply {
             homeRv.adapter = HomeListAdapter().apply {
@@ -93,7 +110,10 @@ class HomeActivity : AppCompatActivity() {
                         movieSection2,
                         movieSection3,
                         movieSection4,
-                        movieSection5
+                        movieSection5,
+                        movieSection6,
+                        movieSection7,
+                        movieSection8
                     )
                 )
             }
