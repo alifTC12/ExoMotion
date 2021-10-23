@@ -47,6 +47,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.PlayerTheme);
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
     }
