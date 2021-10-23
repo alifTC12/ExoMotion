@@ -1,11 +1,13 @@
 package com.example.exoplayer.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.exoplayer.PlayerActivity
 import com.example.exoplayer.databinding.ItemMovieBinding
 import com.example.exoplayer.domain.Movie
 
@@ -32,6 +34,12 @@ private object MovieDiffUtil : DiffUtil.ItemCallback<Movie>() {
 
 class MovieViewHolder(private val binding: ItemMovieBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        binding.root.setOnClickListener {
+            itemView.context.startActivity(Intent(itemView.context, PlayerActivity::class.java))
+        }
+    }
 
     fun bind(movie: Movie) {
         binding.apply {
