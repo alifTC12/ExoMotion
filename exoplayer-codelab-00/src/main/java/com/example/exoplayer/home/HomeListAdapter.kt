@@ -9,7 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.exoplayer.databinding.ItemMovieSectionBinding
 import com.example.exoplayer.domain.MovieSection
 
-class HomeListAdapter : ListAdapter<MovieSection, MovieSectionViewHolder>(MovieSectionDiffUtil) {
+
+class HomeListAdapter(private val interaction: Interaction) :
+    ListAdapter<MovieSection, HomeListAdapter.MovieSectionViewHolder>(MovieSectionDiffUtil) {
+
+    companion object {
+        interface Interaction {
+            fun onMovieClicked()
+        }
+    }
+
     private val layoutManagerStates = hashMapOf<String, Parcelable?>()
 
     override fun onViewRecycled(holder: MovieSectionViewHolder) {
@@ -31,6 +40,33 @@ class HomeListAdapter : ListAdapter<MovieSection, MovieSectionViewHolder>(MovieS
             state?.let { onRestoreInstanceState(it) }
         }
     }
+
+    inner class MovieSectionViewHolder(private val binding: ItemMovieSectionBinding) :
+        RecyclerView.ViewHolder(binding.root), NestedRecyclerViewViewHolder {
+        private lateinit var movieSection: MovieSection
+
+        init {
+            binding.moviesRv.adapter = MovieListAdapter(interaction)
+        }
+
+        fun bind(movieSection: MovieSection) {
+            this.movieSection = movieSection
+
+            binding.apply {
+                titleTv.text = movieSection.title
+                (moviesRv.adapter as MovieListAdapter).submitList(movieSection.movies)
+                moviesRv.setHasFixedSize(true)
+            }
+        }
+
+        override fun getId(): String {
+            return movieSection.id
+        }
+
+        override fun getLayoutManager(): RecyclerView.LayoutManager? {
+            return binding.moviesRv.layoutManager
+        }
+    }
 }
 
 
@@ -41,32 +77,5 @@ object MovieSectionDiffUtil : DiffUtil.ItemCallback<MovieSection>() {
 
     override fun areContentsTheSame(oldItem: MovieSection, newItem: MovieSection): Boolean {
         return oldItem == newItem
-    }
-}
-
-class MovieSectionViewHolder(private val binding: ItemMovieSectionBinding) :
-    RecyclerView.ViewHolder(binding.root), NestedRecyclerViewViewHolder {
-    private lateinit var movieSection: MovieSection
-
-    init {
-        binding.moviesRv.adapter = MovieListAdapter()
-    }
-
-    fun bind(movieSection: MovieSection) {
-        this.movieSection = movieSection
-
-        binding.apply {
-            titleTv.text = movieSection.title
-            (moviesRv.adapter as MovieListAdapter).submitList(movieSection.movies)
-            moviesRv.setHasFixedSize(true)
-        }
-    }
-
-    override fun getId(): String {
-        return movieSection.id
-    }
-
-    override fun getLayoutManager(): RecyclerView.LayoutManager? {
-        return binding.moviesRv.layoutManager
     }
 }

@@ -1,19 +1,13 @@
 package com.example.exoplayer.home
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.example.exoplayer.databinding.ActivityHomeBinding
 import com.example.exoplayer.domain.Movie
 import com.example.exoplayer.domain.MovieSection
-import com.google.android.material.appbar.AppBarLayout
 import java.util.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction {
 
     private val viewBinding by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         ActivityHomeBinding.inflate(layoutInflater)
@@ -30,18 +24,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
         setUpHomeList()
         setUpToolbar()
-
-        val listener = object : RecyclerView.OnScrollListener() {
-            var overallYScroll = 0
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                overallYScroll += dy
-                if (overallYScroll > viewBinding.appBar.height) {
-                    Toast.makeText(this@HomeActivity, "Hai", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-        viewBinding.homeRv.addOnScrollListener(listener)
     }
 
     private fun setUpToolbar() {
@@ -103,7 +85,7 @@ class HomeActivity : AppCompatActivity() {
         )
 
         viewBinding.apply {
-            homeRv.adapter = HomeListAdapter().apply {
+            homeRv.adapter = HomeListAdapter(this@HomeActivity).apply {
                 submitList(
                     listOf(
                         movieSection,
@@ -119,5 +101,9 @@ class HomeActivity : AppCompatActivity() {
             }
             homeRv.setHasFixedSize(true)
         }
+    }
+
+    override fun onMovieClicked() {
+        viewBinding.root.transitionToEnd()
     }
 }
