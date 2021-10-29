@@ -4,20 +4,14 @@
 
     <Transition
         android:id="@+id/player_section_transition"
-        motion:constraintSetEnd="@+id/showed"
+        motion:constraintSetEnd="@+id/expanded"
         motion:constraintSetStart="@id/gone"
         motion:duration="500" />
 
     <Transition
         motion:constraintSetEnd="@+id/minimized"
-        motion:constraintSetStart="@id/showed"
-        motion:duration="1000">
-        <KeyFrameSet></KeyFrameSet>
-        <OnSwipe
-            motion:dragDirection="dragDown"
-            motion:touchAnchorId="@+id/player_view"
-            motion:touchAnchorSide="bottom" />
-    </Transition>
+        motion:constraintSetStart="@id/expanded"
+        motion:duration="500" />
 
     <ConstraintSet android:id="@+id/gone">
         <Constraint
@@ -38,7 +32,7 @@
             motion:layout_constraintTop_toBottomOf="parent" />
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/showed">
+    <ConstraintSet android:id="@+id/expanded">
         <Constraint
             android:id="@+id/home_menu_group"
             android:visibility="gone" />

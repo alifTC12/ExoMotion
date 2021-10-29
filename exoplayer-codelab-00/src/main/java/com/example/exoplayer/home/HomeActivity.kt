@@ -1,11 +1,17 @@
 package com.example.exoplayer.home
 
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewConfiguration
 import androidx.appcompat.app.AppCompatActivity
+import com.example.exoplayer.R
 import com.example.exoplayer.databinding.ActivityHomeBinding
 import com.example.exoplayer.domain.Movie
 import com.example.exoplayer.domain.MovieSection
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction {
 
@@ -24,6 +30,8 @@ class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction 
         setContentView(viewBinding.root)
         setUpHomeList()
         setUpToolbar()
+        setPlayerSwipeToMinimizeListener()
+        setClickListeners()
     }
 
     private fun setUpToolbar() {
@@ -32,6 +40,12 @@ class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction 
             setDisplayShowTitleEnabled(false)
             setDisplayShowHomeEnabled(false)
             setDisplayHomeAsUpEnabled(false)
+        }
+    }
+
+    private fun setClickListeners() {
+        viewBinding.playerSectionView.setOnClickListener {
+            animateExpandPlayerSection()
         }
     }
 
@@ -105,5 +119,59 @@ class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction 
 
     override fun onMovieClicked() {
         viewBinding.root.transitionToEnd()
+    }
+
+    private fun setPlayerSwipeToMinimizeListener() {
+        viewBinding.playerView.setOnTouchListener(object : View.OnTouchListener {
+            var startY = 0F
+            var startX = 0F
+            val touchSlop = ViewConfiguration.get(this@HomeActivity).scaledTouchSlop
+
+            override fun onTouch(v: View?, event: MotionEvent): Boolean {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        startY = event.y
+                        startX = event.x
+
+                        return true
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        val dy = event.y - startY
+
+                        if (isAClick(startX, event.x, startY, event.y)) {
+                            animateExpandPlayerSection()
+                        } else if (dy.absoluteValue > touchSlop) {
+                            animateMinimizePlayerSection()
+                        }
+                    }
+                }
+
+                return false
+            }
+
+            private fun isAClick(startX: Float, endX: Float, startY: Float, endY: Float): Boolean {
+                val differenceX = abs(startX - endX)
+                val differenceY = abs(startY - endY)
+                return (differenceX > touchSlop || differenceY > touchSlop).not()
+            }
+        })
+    }
+
+    private fun animateMinimizePlayerSection() {
+        viewBinding.motionLayout.apply {
+            if (currentState == R.id.minimized) return@apply
+
+            setTransition(R.id.expanded, R.id.minimized)
+            transitionToState(R.id.minimized)
+        }
+    }
+
+    private fun animateExpandPlayerSection() {
+        viewBinding.motionLayout.apply {
+            if (currentState == R.id.expanded) return@apply
+
+            setTransition(R.id.minimized, R.id.expanded)
+            transitionToState(R.id.expanded)
+        }
     }
 }
