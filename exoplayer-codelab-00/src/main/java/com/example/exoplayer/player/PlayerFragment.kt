@@ -13,7 +13,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
 
-internal class PlayerFragment : Fragment() {
+internal class PlayerFragment : Fragment(), PlayerMotion {
 
     private var player: SimpleExoPlayer? = null
     private var _binding: FragmentPlayerBinding? = null
@@ -103,6 +103,14 @@ internal class PlayerFragment : Fragment() {
         }
 
         player = null
+    }
+
+    override fun startShowContents() {
+        binding.rootPlayerContainer.apply {
+            setTransition(R.id.gone, R.id.expanded)
+            setTransitionDuration(500)
+            transitionToState(R.id.expanded)
+        }
     }
 
     //    private fun setClickListeners() {

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.exoplayer.player.PlayerScreenMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_player_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible">
+    app:layoutDescription="@xml/fragment_player_scene">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/player_section_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,4 +40,11 @@
         app:surface_type="surface_view"
         app:use_controller="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/player_content_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:constraint_referenced_ids="player_view,player_section_view" />
+
+</com.example.exoplayer.player.PlayerScreenMotionLayout>

@@ -2,9 +2,11 @@ package com.example.exoplayer.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.exoplayer.R
 import com.example.exoplayer.databinding.ActivityHomeBinding
 import com.example.exoplayer.domain.Movie
 import com.example.exoplayer.domain.MovieSection
+import com.example.exoplayer.player.PlayerMotion
 import java.util.*
 
 class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction {
@@ -104,7 +106,7 @@ class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction 
     }
 
     override fun onMovieClicked() {
-//        viewBinding.root.transitionToEnd()
+        (supportFragmentManager.findFragmentById(R.id.player_fragment) as PlayerMotion).startShowContents()
     }
 
 //    private fun animateMinimizePlayerSection() {
