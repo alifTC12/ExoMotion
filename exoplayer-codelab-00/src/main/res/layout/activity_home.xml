@@ -14,8 +14,8 @@ limitations under the License. -->
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/motion_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
@@ -88,11 +88,13 @@ limitations under the License. -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
+    <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@color/colorPrimary"
-        android:visibility="gone" />
+        android:minHeight="200dp"
+        app:resize_mode="fixed_width"
+        app:surface_type="surface_view"
+        app:use_controller="true" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

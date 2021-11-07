@@ -1,5 +1,6 @@
 package com.example.exoplayer.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -9,11 +10,17 @@ import com.example.exoplayer.R
 import com.example.exoplayer.databinding.ActivityHomeBinding
 import com.example.exoplayer.domain.Movie
 import com.example.exoplayer.domain.MovieSection
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.util.MimeTypes
+import com.google.android.exoplayer2.util.Util
 import java.util.*
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 
 class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction {
+
+    private var player: SimpleExoPlayer? = null
 
     private val viewBinding by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         ActivityHomeBinding.inflate(layoutInflater)
@@ -32,6 +39,73 @@ class HomeActivity : AppCompatActivity(), HomeListAdapter.Companion.Interaction 
         setUpToolbar()
         setPlayerSwipeToMinimizeListener()
         setClickListeners()
+        initPlayer()
+    }
+
+    private fun initPlayer() {
+        player = SimpleExoPlayer.Builder(this)
+            .build()
+            .also {
+                viewBinding.playerView.player = player
+
+                val mediaItem = MediaItem.Builder()
+                    .setUri(getString(R.string.media_url_dash))
+                    .setMimeType(MimeTypes.APPLICATION_MPD)
+                    .build()
+
+                it.setMediaItem(mediaItem)
+            }
+
+        player?.apply {
+            prepare()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (Util.SDK_INT >= 24) {
+            initPlayer()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemUi()
+        if (Util.SDK_INT < 24 || player == null) {
+            initPlayer()
+        }
+    }
+
+    @SuppressLint("InlinedApi")
+    private fun hideSystemUi() {
+        viewBinding.playerView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LOW_PROFILE
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (Util.SDK_INT < 24) {
+            releasePlayer()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (Util.SDK_INT >= 24) {
+            releasePlayer()
+        }
+    }
+
+    private fun releasePlayer() {
+        player?.run {
+            release()
+        }
+
+        player = null
     }
 
     private fun setUpToolbar() {
