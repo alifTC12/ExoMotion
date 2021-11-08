@@ -97,16 +97,21 @@ internal class PlayerScreenMotionLayout(
         transitionListenerList += listener
     }
 
-    private val gestureDetector =
+    private val singleTapGestureDetector =
         GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
             override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                if (currentState == R.id.minimized) {
+                    setTransition(R.id.minimized, R.id.expanded)
+                    setTransitionDuration(200)
+                    transitionToEnd()
+                }
                 transitionToEnd()
                 return false
             }
         })
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(event) //This ensures the Mini Player is maximised on single tap
+        singleTapGestureDetector.onTouchEvent(event)
         when (event.actionMasked) {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 hasTouchStarted = false
