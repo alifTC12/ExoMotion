@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.exoplayer.player.PlayerScreenMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_player_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -46,5 +47,16 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         app:constraint_referenced_ids="player_view,player_section_view" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/close_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintBottom_toBottomOf="@id/player_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/player_view"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </com.example.exoplayer.player.PlayerScreenMotionLayout>

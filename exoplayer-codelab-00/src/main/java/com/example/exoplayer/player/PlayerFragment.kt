@@ -1,6 +1,5 @@
 package com.example.exoplayer.player
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +31,16 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPlayer()
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.apply {
+            closeIv.setOnClickListener {
+                rootPlayerContainer.jumpToState(R.id.gone)
+                releasePlayer()
+            }
+        }
     }
 
     private fun initPlayer() {
@@ -62,20 +71,9 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 
     override fun onResume() {
         super.onResume()
-        hideSystemUi()
         if (Util.SDK_INT < 24 || player == null) {
             initPlayer()
         }
-    }
-
-    @SuppressLint("InlinedApi")
-    private fun hideSystemUi() {
-        binding.playerView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LOW_PROFILE
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 
     override fun onDestroyView() {
@@ -112,10 +110,4 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
             transitionToState(R.id.expanded)
         }
     }
-
-    //    private fun setClickListeners() {
-//        viewBinding.playerSectionView.setOnClickListener {
-//            animateExpandPlayerSection()
-//        }
-//    }
 }
