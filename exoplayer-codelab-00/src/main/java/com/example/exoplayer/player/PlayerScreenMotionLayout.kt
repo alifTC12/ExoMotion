@@ -15,7 +15,7 @@ internal class PlayerScreenMotionLayout(
 ) : MotionLayout(context, attributeSet) {
 
     private val viewToDetectTouch by lazy {
-        findViewById<View>(R.id.root_player_container)
+        findViewById<View>(R.id.player_view)
     }
     private val viewRect = Rect()
     private var hasTouchStarted = false
