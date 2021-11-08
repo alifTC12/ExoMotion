@@ -5,7 +5,8 @@
     android:id="@+id/root_player_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_player_scene">
+    app:layoutDescription="@xml/fragment_player_scene"
+    tools:background="@color/exo_black_opacity_60">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/player_section_view"
@@ -41,6 +42,36 @@
         app:surface_type="surface_view"
         app:use_controller="true" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Video Demo Motion Layout"
+        android:textColor="@color/exo_white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/author_tv"
+        app:layout_constraintEnd_toStartOf="@id/close_iv"
+        app:layout_constraintStart_toEndOf="@id/player_view"
+        app:layout_constraintTop_toTopOf="@id/player_view"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/author_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="creativeChannel"
+        android:textColor="@color/exo_white_opacity_70"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/close_iv"
+        app:layout_constraintStart_toStartOf="@id/title_tv"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/player_content_group"
         android:layout_width="match_parent"
@@ -48,7 +79,7 @@
         android:visibility="gone"
         app:constraint_referenced_ids="player_view,player_section_view" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/close_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"

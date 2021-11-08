@@ -17,13 +17,27 @@
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0.0"
-                motion:framePosition="98"
-                motion:motionTarget="@+id/close_iv" />
-        </KeyFrameSet>
-        <KeyFrameSet>
+                motion:framePosition="95"
+                motion:motionTarget="@+id/author_tv" />
             <KeyAttribute
                 android:alpha="1.0"
-                motion:framePosition="99"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/author_tv" />
+            <KeyAttribute
+                android:alpha="0.0"
+                motion:framePosition="95"
+                motion:motionTarget="@+id/title_tv" />
+            <KeyAttribute
+                android:alpha="1.0"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/title_tv" />
+            <KeyAttribute
+                android:alpha="0.0"
+                motion:framePosition="95"
+                motion:motionTarget="@+id/close_iv" />
+            <KeyAttribute
+                android:alpha="1.0"
+                motion:framePosition="100"
                 motion:motionTarget="@+id/close_iv" />
         </KeyFrameSet>
     </Transition>
@@ -98,8 +112,9 @@
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
             android:id="@+id/close_iv"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="12dp"
             android:visibility="visible"
             motion:layout_constraintBottom_toBottomOf="@id/player_section_view"
             motion:layout_constraintEnd_toEndOf="parent"
