@@ -30,6 +30,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--    <com.example.exoplayer.player.CustomExoPlayerView-->
+    <!--        android:id="@+id/player_swipe_area"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content">-->
+
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
@@ -38,9 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:resize_mode="fixed_width"
+        app:resize_mode="fill"
         app:surface_type="surface_view"
         app:use_controller="true" />
+    <!--    </com.example.exoplayer.player.CustomExoPlayerView>-->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title_tv"
