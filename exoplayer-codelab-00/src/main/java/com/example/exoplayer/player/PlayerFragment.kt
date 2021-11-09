@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.exoplayer.R
 import com.example.exoplayer.databinding.FragmentPlayerBinding
+import com.example.exoplayer.domain.Movie
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
+import java.util.*
 
 internal class PlayerFragment : Fragment(), PlayerMotion {
 
@@ -41,6 +43,23 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 //        })
         initPlayer()
         setOnClickListeners()
+        setUpMovieList()
+    }
+
+    private fun setUpMovieList() {
+        binding.moviesRv.apply {
+            adapter = MovieListMaxWidthAdapter().apply {
+                val movie = Movie(
+                    id = UUID.randomUUID().toString(),
+                    imgUrl = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80"
+                )
+                val movie2 = Movie(
+                    id = UUID.randomUUID().toString(),
+                    imgUrl = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80"
+                )
+                submitList(listOf(movie, movie2))
+            }
+        }
     }
 
     private fun setOnClickListeners() {
