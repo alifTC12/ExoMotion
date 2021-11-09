@@ -34,6 +34,9 @@
     <!--        android:id="@+id/player_swipe_area"-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content">-->
+    <!--    </com.example.exoplayer.player.CustomExoPlayerView>-->
+
+    <include layout="@layout/include_player_horizontal_menu" />
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player_view"
@@ -46,10 +49,9 @@
         app:resize_mode="fill"
         app:surface_type="surface_view"
         app:use_controller="true" />
-    <!--    </com.example.exoplayer.player.CustomExoPlayerView>-->
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_tv"
+        android:id="@+id/minimized_title_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -58,14 +60,14 @@
         android:text="Video Demo Motion Layout"
         android:textColor="@color/exo_white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/author_tv"
+        app:layout_constraintBottom_toTopOf="@id/minimized_author_tv"
         app:layout_constraintEnd_toStartOf="@id/close_iv"
         app:layout_constraintStart_toEndOf="@id/player_view"
         app:layout_constraintTop_toTopOf="@id/player_view"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/author_tv"
+        android:id="@+id/minimized_author_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -75,8 +77,8 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/close_iv"
-        app:layout_constraintStart_toStartOf="@id/title_tv"
-        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+        app:layout_constraintStart_toStartOf="@id/minimized_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/minimized_title_tv" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/player_content_group"

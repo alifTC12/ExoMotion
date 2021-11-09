@@ -18,19 +18,19 @@
             <KeyAttribute
                 android:alpha="0.0"
                 motion:framePosition="95"
-                motion:motionTarget="@+id/author_tv" />
+                motion:motionTarget="@+id/minimized_author_tv" />
             <KeyAttribute
                 android:alpha="1.0"
                 motion:framePosition="100"
-                motion:motionTarget="@+id/author_tv" />
+                motion:motionTarget="@+id/minimized_author_tv" />
             <KeyAttribute
                 android:alpha="0.0"
                 motion:framePosition="95"
-                motion:motionTarget="@+id/title_tv" />
+                motion:motionTarget="@+id/minimized_title_tv" />
             <KeyAttribute
                 android:alpha="1.0"
                 motion:framePosition="100"
-                motion:motionTarget="@+id/title_tv" />
+                motion:motionTarget="@+id/minimized_title_tv" />
             <KeyAttribute
                 android:alpha="0.0"
                 motion:framePosition="95"
