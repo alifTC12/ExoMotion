@@ -26,10 +26,8 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
         get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentPlayerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,9 +47,17 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
         setOnClickListeners()
         setUpMovieList()
         setUpChipsFilter()
+        setTriggerFiltersVisibility()
+    }
 
+    private fun setTriggerFiltersVisibility() {
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            println("onScrolled ${appBarLayout.height} " + verticalOffset.absoluteValue)
+            binding.motionMoviesLayout.apply {
+                if (appBarLayout.height - verticalOffset.absoluteValue <= 150) {
+                    setTransition(R.id.filter_visible_transition)
+                    progress = 1 - ((appBarLayout.height.toFloat() - verticalOffset.absoluteValue) / 150)
+                }
+            }
         })
     }
 
@@ -91,7 +97,11 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
                     id = UUID.randomUUID().toString(),
                     imgUrl = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80"
                 )
-                submitList(listOf(movie, movie2))
+                val movie3 = Movie(
+                    id = UUID.randomUUID().toString(),
+                    imgUrl = "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80"
+                )
+                submitList(listOf(movie, movie2, movie3))
             }
         }
     }

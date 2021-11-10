@@ -135,15 +135,29 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motion_movies_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            app:layoutDescription="@xml/movie_filter_chip_scene"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movies_rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/filter_menus_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/movies_filter_chip_group"
@@ -152,13 +166,7 @@
                     app:singleSelection="true" />
             </HorizontalScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movies_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.exoplayer2.ui.PlayerView
