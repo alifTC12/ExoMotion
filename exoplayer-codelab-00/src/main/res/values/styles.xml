@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License. -->
 <resources>
 
-    <style name="HomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="HomeTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -25,4 +25,19 @@ limitations under the License. -->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipStrokeColor">@color/color_outline_chip_state</item>
+        <item name="chipBackgroundColor">@color/color_bg_chip_state</item>
+        <item name="chipStrokeWidth">2dp</item>
+    </style>
+
+    <style name="ChipDefault" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/exo_white</item>
+    </style>
+
+    <style name="ChipSelected" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 </resources>

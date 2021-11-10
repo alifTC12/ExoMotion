@@ -12,7 +12,11 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import java.util.*
+import kotlin.math.absoluteValue
 
 internal class PlayerFragment : Fragment(), PlayerMotion {
 
@@ -44,6 +48,36 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
         initPlayer()
         setOnClickListeners()
         setUpMovieList()
+        setUpChipsFilter()
+
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            println("onScrolled ${appBarLayout.height} " + verticalOffset.absoluteValue)
+        })
+    }
+
+    private fun setUpChipsFilter() {
+        val filters = listOf("All", "Computer Keyboard", "Related", "Recently Upload")
+        filters.forEachIndexed { index, filter ->
+            val chip = Chip(requireActivity())
+            val chipDrawable = ChipDrawable.createFromAttributes(
+                requireContext(), null, 0, R.style.ChipStyle
+            )
+
+            chip.apply {
+                setChipDrawable(chipDrawable)
+                id = View.generateViewId()
+                text = filter
+                isCheckable = true
+                isChecked = index == 0
+                shapeAppearanceModel =
+                    shapeAppearanceModel.withCornerSize(30F)
+            }
+
+            binding.moviesFilterChipGroup.addView(chip)
+
+            if (chip.isChecked) chip.setTextAppearance(R.style.ChipSelected)
+            else chip.setTextAppearance(R.style.ChipDefault)
+        }
     }
 
     private fun setUpMovieList() {
