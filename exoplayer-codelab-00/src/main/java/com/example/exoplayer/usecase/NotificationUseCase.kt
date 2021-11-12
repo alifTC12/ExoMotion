@@ -1,8 +1,8 @@
-package com.example.exoplayer.data.gateway
+package com.example.exoplayer.usecase
 
 import com.example.exoplayer.domain.Inbox
 import io.reactivex.Single
 
-interface NotificationGateway {
+interface NotificationUseCase {
     fun getNotifications(): Single<Inbox>
 }

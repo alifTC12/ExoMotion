@@ -1,11 +1,11 @@
 package com.example.exoplayer.notification
 
 import com.example.exoplayer.data.gateway.NotificationGatewayImpl
+import com.example.exoplayer.domain.Inbox
+import com.example.exoplayer.domain.Notification
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.vidio.domain.entity.Inbox
-import com.vidio.domain.entity.Notification
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

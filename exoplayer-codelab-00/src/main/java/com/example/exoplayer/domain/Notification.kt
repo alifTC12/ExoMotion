@@ -1,4 +1,4 @@
-package com.vidio.domain.entity
+package com.example.exoplayer.domain
 
 import java.io.Serializable
 
