@@ -1,0 +1,17 @@
+{
+  "notifications": [
+    {
+      "id": 123,
+      "title": "Ada yang seru di Vidio! 3",
+      "body": "test",
+      "url": "https://www.vidio.com/watch/1799882-liverpool-tahan-manchester-united-di-old-trafford",
+      "timestamp": 1617763983650,
+      "category_id": "information",
+      "image_url": "https://cdns.klimg.com/merdeka.com/i/w/tokoh/2013/06/24/6830/200x300/sctv.jpg",
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Solid_black.svg/512px-Solid_black.svg.png",
+      "type": "normal",
+      "seen": true
+    }
+  ],
+  "has_unseen_notifications": true
+}
