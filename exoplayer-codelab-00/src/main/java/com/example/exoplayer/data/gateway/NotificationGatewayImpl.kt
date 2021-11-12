@@ -1,7 +1,7 @@
-package com.example.exoplayer.notification.data.gateway
+package com.example.exoplayer.data.gateway
 
-import com.example.exoplayer.notification.data.api.NotificationApi
-import com.example.exoplayer.notification.data.model.NotificationListResponse
+import com.example.exoplayer.data.api.NotificationApi
+import com.example.exoplayer.data.model.NotificationListResponse
 import com.vidio.domain.entity.Inbox
 import com.vidio.domain.entity.Notification
 import io.reactivex.Single

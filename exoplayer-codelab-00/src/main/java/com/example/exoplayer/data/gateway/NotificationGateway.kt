@@ -1,4 +1,4 @@
-package com.example.exoplayer.notification.data.gateway
+package com.example.exoplayer.data.gateway
 
 import com.vidio.domain.entity.Inbox
 import io.reactivex.Single

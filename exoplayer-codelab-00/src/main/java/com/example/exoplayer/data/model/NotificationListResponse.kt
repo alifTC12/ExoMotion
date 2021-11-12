@@ -1,4 +1,4 @@
-package com.example.exoplayer.notification.data.model
+package com.example.exoplayer.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

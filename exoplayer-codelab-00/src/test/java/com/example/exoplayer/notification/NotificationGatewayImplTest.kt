@@ -1,6 +1,6 @@
 package com.example.exoplayer.notification
 
-import com.example.exoplayer.notification.data.gateway.NotificationGatewayImpl
+import com.example.exoplayer.data.gateway.NotificationGatewayImpl
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

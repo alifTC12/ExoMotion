@@ -1,6 +1,6 @@
-package com.example.exoplayer.notification.data.api
+package com.example.exoplayer.data.api
 
-import com.example.exoplayer.notification.data.model.NotificationListResponse
+import com.example.exoplayer.data.model.NotificationListResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 
