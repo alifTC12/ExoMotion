@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import com.example.exoplayer.R
 import com.example.exoplayer.databinding.FragmentPlayerBinding
 import com.example.exoplayer.domain.Movie
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.util.Log
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
 import com.google.android.material.appbar.AppBarLayout
@@ -18,12 +21,15 @@ import com.google.android.material.chip.ChipDrawable
 import java.util.*
 import kotlin.math.absoluteValue
 
+private const val TAG = "PlayerFragment"
+
 internal class PlayerFragment : Fragment(), PlayerMotion {
 
     private var player: SimpleExoPlayer? = null
     private var _binding: FragmentPlayerBinding? = null
     private val binding: FragmentPlayerBinding
         get() = _binding!!
+    private val playbackStateListener: Player.EventListener = playbackStateListener()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,7 +49,6 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 //                return true
 //            }
 //        })
-        initPlayer()
         setOnClickListeners()
         setUpMovieList()
         setUpChipsFilter()
@@ -55,7 +60,8 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
             binding.motionMoviesLayout.apply {
                 if (appBarLayout.height - verticalOffset.absoluteValue <= 150) {
                     setTransition(R.id.filter_visible_transition)
-                    progress = 1 - ((appBarLayout.height.toFloat() - verticalOffset.absoluteValue) / 150)
+                    progress =
+                        1 - ((appBarLayout.height.toFloat() - verticalOffset.absoluteValue) / 150)
                 }
             }
         })
@@ -119,7 +125,7 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
         player = SimpleExoPlayer.Builder(requireContext())
             .build()
             .also {
-                binding.playerView.player = player
+                binding.playerView.player = it
 
                 val mediaItem = MediaItem.Builder()
                     .setUri(getString(R.string.media_url_dash))
@@ -130,21 +136,9 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
             }
 
         player?.apply {
+            playWhenReady = true
+            addListener(playbackStateListener)
             prepare()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (Util.SDK_INT >= 24) {
-            initPlayer()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (Util.SDK_INT < 24 || player == null) {
-            initPlayer()
         }
     }
 
@@ -169,6 +163,7 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 
     private fun releasePlayer() {
         player?.run {
+            removeListener(playbackStateListener)
             release()
         }
 
@@ -180,6 +175,20 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
             setTransition(R.id.gone, R.id.expanded)
             setTransitionDuration(500)
             transitionToState(R.id.expanded)
+        }
+        initPlayer()
+    }
+
+    private fun playbackStateListener() = object : Player.EventListener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            val stateString: String = when (playbackState) {
+                ExoPlayer.STATE_IDLE -> "ExoPlayer.STATE_IDLE      -"
+                ExoPlayer.STATE_BUFFERING -> "ExoPlayer.STATE_BUFFERING -"
+                ExoPlayer.STATE_READY -> "ExoPlayer.STATE_READY     -"
+                ExoPlayer.STATE_ENDED -> "ExoPlayer.STATE_ENDED     -"
+                else -> "UNKNOWN_STATE             -"
+            }
+            Log.d(TAG, "changed state to $stateString")
         }
     }
 }
