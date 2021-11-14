@@ -40,15 +40,6 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.playerView.setOnTouchListener(object: View.OnTouchListener {
-//            override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-//                if (event?.actionMasked == MotionEvent.ACTION_MOVE) {
-//                    return false
-//                }
-//
-//                return true
-//            }
-//        })
         initPlayer()
         setOnClickListeners()
         setUpMovieList()
