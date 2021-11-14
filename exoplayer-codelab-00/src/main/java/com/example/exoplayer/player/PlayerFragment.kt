@@ -49,6 +49,7 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
 //                return true
 //            }
 //        })
+        initPlayer()
         setOnClickListeners()
         setUpMovieList()
         setUpChipsFilter()
@@ -125,7 +126,7 @@ internal class PlayerFragment : Fragment(), PlayerMotion {
         player = SimpleExoPlayer.Builder(requireContext())
             .build()
             .also {
-                binding.playerView.player = it
+                binding.playerViewContainer.player = it
 
                 val mediaItem = MediaItem.Builder()
                     .setUri(getString(R.string.media_url_dash))

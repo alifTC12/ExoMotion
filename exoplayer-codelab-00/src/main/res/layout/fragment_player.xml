@@ -33,7 +33,7 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player_view">
+        app:layout_constraintTop_toBottomOf="@id/player_view_container">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
@@ -170,8 +170,26 @@
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/player_view"
+    <!--    <com.example.exoplayer.player.CustomExoPlayerView2-->
+    <!--        android:id="@+id/player_view_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <com.google.android.exoplayer2.ui.PlayerView-->
+    <!--            android:id="@+id/player_view"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="250dp"-->
+    <!--            android:minHeight="200dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:resize_mode="fill"-->
+    <!--            app:surface_type="surface_view"-->
+    <!--            app:use_controller="true" />-->
+    <!--    </com.example.exoplayer.player.CustomExoPlayerView2>-->
+
+    <com.example.exoplayer.player.CustomExoPlayerView
+        android:id="@+id/player_view_container"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:minHeight="200dp"
@@ -194,8 +212,8 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/minimized_author_tv"
         app:layout_constraintEnd_toStartOf="@id/close_iv"
-        app:layout_constraintStart_toEndOf="@id/player_view"
-        app:layout_constraintTop_toTopOf="@id/player_view"
+        app:layout_constraintStart_toEndOf="@id/player_view_container"
+        app:layout_constraintTop_toTopOf="@id/player_view_container"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -218,9 +236,9 @@
         android:layout_height="30dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_baseline_close_24"
-        app:layout_constraintBottom_toBottomOf="@id/player_view"
+        app:layout_constraintBottom_toBottomOf="@id/player_view_container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/player_view"
+        app:layout_constraintTop_toTopOf="@id/player_view_container"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </com.example.exoplayer.player.PlayerScreenMotionLayout>
