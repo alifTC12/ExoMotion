@@ -24,6 +24,7 @@ limitations under the License. -->
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:visibility="gone"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,12 +58,6 @@ limitations under the License. -->
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/home_menu_group"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:constraint_referenced_ids="appBar,home_rv" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/player_fragment"
