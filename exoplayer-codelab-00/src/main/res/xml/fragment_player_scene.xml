@@ -7,15 +7,11 @@
         motion:constraintSetStart="@id/gone" />
 
     <Transition
-        android:id="@+id/expanded_to_minimized"
+        motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/minimized"
-        motion:constraintSetStart="@id/expanded">
-        <OnSwipe
-            motion:dragDirection="dragDown"
-            motion:maxAcceleration="200"
-            motion:touchAnchorId="@id/player_view_container"
-            motion:touchAnchorSide="bottom"
-            motion:touchRegionId="@id/player_view_container" />
+        motion:constraintSetStart="@id/before_minimized"
+        motion:duration="100">
+
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0.0"
@@ -42,6 +38,19 @@
                 motion:framePosition="100"
                 motion:motionTarget="@+id/close_iv" />
         </KeyFrameSet>
+
+    </Transition>
+
+    <Transition
+        android:id="@+id/expanded_to_minimized"
+        motion:constraintSetEnd="@+id/before_minimized"
+        motion:constraintSetStart="@id/expanded">
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:maxAcceleration="200"
+            motion:touchAnchorId="@id/player_view_container"
+            motion:touchAnchorSide="bottom"
+            motion:touchRegionId="@id/player_view_container" />
     </Transition>
 
     <ConstraintSet android:id="@+id/gone">
@@ -59,7 +68,7 @@
         <Constraint
             android:id="@+id/player_view_container"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:visibility="visible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -81,7 +90,7 @@
         <Constraint
             android:id="@+id/player_view_container"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
@@ -112,6 +121,24 @@
             motion:layout_constraintBottom_toBottomOf="@id/player_section_view"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="@id/player_section_view" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/before_minimized">
+        <Constraint
+            android:id="@+id/player_section_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/player_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0"
+            motion:layout_constraintStart_toStartOf="parent" />
     </ConstraintSet>
 
 </MotionScene>
