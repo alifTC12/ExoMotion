@@ -2,10 +2,11 @@ package com.example.exoplayer.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.exoplayer.R
 import com.example.exoplayer.databinding.ItemMovieBinding
 import com.example.exoplayer.domain.Movie
 
@@ -30,11 +31,20 @@ class MovieListAdapter(private val interaction: HomeListAdapter.Companion.Intera
         }
 
         fun bind(movie: Movie) {
-            binding.apply {
-                Glide.with(itemView.context)
-                    .load(movie.imgUrl)
-                    .into(binding.thumbnailIv)
-            }
+            // TODO remove dummy thumbnail
+
+            val thumbnails =
+                listOf(
+                    R.drawable.ic_movie_1,
+                    R.drawable.ic_movie_2,
+                    R.drawable.ic_movie_3
+                ).shuffled()
+            binding.thumbnailIv.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    binding.root.context,
+                    thumbnails.first()
+                )
+            )
         }
     }
 }
