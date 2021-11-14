@@ -37,14 +37,14 @@ limitations under the License. -->
             app:layout_collapseMode="pin"
             tools:ignore="AlohaComponentIssue">
 
-            <ImageView
+            <TextView
                 android:id="@+id/toolbar_logo"
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_vidio" />
+                android:text="PlayTube"
+                android:textColor="@color/exo_white"
+                android:textSize="18sp" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
