@@ -99,7 +99,7 @@ internal class PlayerScreenMotionLayout(
 
     private val singleTapGestureDetector =
         GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+            override fun onSingleTapUp(e: MotionEvent?): Boolean {
                 if (currentState == R.id.minimized) {
                     setTransition(R.id.minimized, R.id.expanded)
                     setTransitionDuration(200)
